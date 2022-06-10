@@ -1,5 +1,9 @@
 #include "ConsolePlayer.h"
 #include "BasicFunction.h"
+#include <iostream>
+#include <conio.h>
+
+ClassOfMessageBox m;
 
 /*
 * 
@@ -11,7 +15,17 @@ void ConsolePlayer::loadPage() {
 
     printf("%s", welcomeWords.c_str());
     printf("%s", loadWords.c_str());
+    system("cls");
 
+}
+
+string ConsolePlayer::loginPage() {
+    printf("%s", getUserNameWords.c_str());
+    getline(cin, name);
+    conTitle = "title Hello " + name + "! Welcome to 2048 Game!";
+    system(conTitle.c_str());
+    system("cls");
+    return name;
 }
 
 void ConsolePlayer::welcomePage() {
@@ -20,6 +34,28 @@ void ConsolePlayer::welcomePage() {
 
     system("cls");
     system(conTitle.c_str());
+}
+
+int ConsolePlayer::indexPage() {                                               // show index
+    int tempInt;
+    system("cls");
+    printf("%s", indexTitleWords.c_str());
+    printf("%s", indexMenuWords.c_str());
+    while (true) {
+        tempInt = keyPress();
+        switch (tempInt) {
+        case 49:
+        case 50:
+        case 51:
+        case 52:
+        case 53:
+        case 54:
+            return tempInt - 48; break;
+        case 27:
+            return 27;
+        }
+    }
+
 }
 
 void ConsolePlayer::setEN_US() {
@@ -43,6 +79,92 @@ void ConsolePlayer::setZH_CN() {
         infoTitle = "-------- 帮助 --------\n", infoWords = " 欢迎来到2048！ \n 你可以按下 上下左右方向键 或 W/S/A/D 来控制数字的移动。\n 目前游戏还没有支持 GUI ，如果少侠有意向帮助我，请至 Github。 \n #按下任意键返回",
         languageTitle = "-------- 语言 --------\n", languageWords = " 少侠可以选择以下语言 \n 0.English \n 1.中文（简体） \n";
 
+}
+
+int ConsolePlayer::settingPage() {                                             // show set
+    int tempInt;
+    system("cls");
+    printf("%s", setTitleWords.c_str());
+    printf("%s", setMenuWords.c_str());
+    while (true) {
+        tempInt = keyPress();
+        switch (tempInt) {
+        case 49:
+            setUserPage(name);
+            system("cls");
+            printf("%s", setTitleWords.c_str());
+            printf("%s", setMenuWords.c_str());
+            break;
+        case 50:
+            setHelpPage();
+            system("cls");
+            printf("%s", setTitleWords.c_str());
+            printf("%s", setMenuWords.c_str());
+            break;
+        case 51:
+            setLanguage();
+            system("cls");
+            printf("%s", setTitleWords.c_str());
+            printf("%s", setMenuWords.c_str());
+            break;
+        case 52:
+            historyPage();
+            system("cls");
+            printf("%s", setTitleWords.c_str());
+            printf("%s", setMenuWords.c_str());
+            break;
+        case 27:
+            return 0;
+        }
+    }
+}
+
+string ConsolePlayer::setUserPage(string orin) {
+    if (m.logout()) {
+        system("cls");
+        printf("%s", logInTitle.c_str());
+        return loginPage();
+    }
+    return orin;
+}
+void ConsolePlayer::setHelpPage() {
+    system("cls");
+    printf("%s", infoTitle.c_str());
+    printf("%s", infoWords.c_str());
+    while (true) {
+        if (_kbhit()) {
+            system("cls");
+            break;
+        }
+    }
+}
+void ConsolePlayer::setLanguage() {
+    int tempInt;
+    system("cls");
+    printf("%s", languageTitle.c_str());
+    printf("%s", languageWords.c_str());
+    tempInt = keyPress();
+    switch (tempInt) {
+    case 48:
+        setEN_US();
+        break;
+    case 49:
+        setZH_CN();
+        break;
+    }
+}
+
+void ConsolePlayer::gameOver(int score, int highestScore) {
+    printf("\n\n Game is over. And your score is %d.\n", score);
+    while (true) {
+        if (_kbhit()) {
+            break;
+        }
+    }
+}
+
+void ConsolePlayer::historyPage() {
+    NEEDSDEVELOP();
 }
 
 /*

@@ -9,9 +9,17 @@
 * 
 */ 
 
+using namespace std;
+
 int GameBox::getScore() { return score; }
 
 std::string GameBox::getUserName() { return userName; }
+
+void GameBox::setUserName(string name) { userName = name; }
+
+
+int GameBox::getTopScore() { return historyTopScore; }
+
 
 gameMap GameBox::getMap() {
     gameMap ret;
@@ -27,6 +35,7 @@ gameMap GameBox::getMap() {
 }
 
 void GameBox::initialize() {
+    score = 0;
     memset(blocks, 0, sizeof(blocks));
     srand(int(time(0)));
     blocks[rand() % 4 + 1][rand() % 4 + 1]._int = (rand() % 2 + 1) * 2;
@@ -37,21 +46,20 @@ void GameBox::bonus(int addScore) {
     score += addScore;
 }
 
-
 bool GameBox::checkStatement() {                                // Check whether the game is over
-    for (int i = 1; i < 4; i++) {
+    for (int i = 1; i <= 4; i++) {
         for (int j = 1; j < 4; j++) {
             if ((!blocks[i][j]._int) || (blocks[i][j]._int == blocks[i + 1][j]._int) || (blocks[i][j]._int == blocks[i][j + 1]._int)) {
                 return true;
             }
         }
     }
-    for (int i = 0; i < 3; i++) {
-        if (!(blocks[3][i]._int) || (blocks[3][i]._int == blocks[3][i + 1]._int) || (!blocks[i][3]._int) || (blocks[i][3]._int == blocks[i + 1][3]._int)) {
+    for (int i = 1; i < 4; i++) {
+        if (!(blocks[4][i]._int) || (blocks[4][i]._int == blocks[4][i + 1]._int) || (!blocks[i][4]._int) || (blocks[i][4]._int == blocks[i + 1][4]._int)) {
             return true;
         }
     }
-    if (!blocks[3][3]._int) {
+    if (!blocks[4][4]._int) {
         return true;
     }
     return false;

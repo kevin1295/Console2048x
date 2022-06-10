@@ -72,8 +72,40 @@ int play() {
 
 int main()
 {
-    printf("Welcone to 2048!\n");
+    int indexReturn, setReturn;
+    int mark;
+
     Display.loadPage();
+    player.setUserName(Display.loginPage());
+    Display.welcomePage();
+    while (true) {
+        indexReturn = Display.indexPage();
+        switch (indexReturn) {
+        case 1:
+            player.initialize();
+            mark = play();
+            Display.gameOver(mark, player.getTopScore());
+            break;
+        case 2:
+            setReturn = Display.settingPage();
+            break;
+        case 3:
+            player.setUserName(Display.setUserPage(player.getUserName()));
+            break;
+        case 4:
+            Display.setHelpPage();
+            break;
+        case 5:
+            NEEDSDEVELOP();
+            break;
+        case 6:
+            system("start https://github.com/kevin1295");
+            break;
+        case 27:
+            return 0;
+        }
+    }
+
     return 0;
 }
 

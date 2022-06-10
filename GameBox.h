@@ -33,12 +33,13 @@ public:
 	block_box blocks[5][5];
 	// This vari is used to store the present map
 
-	short history[65536][5][5];
+	short history[65536][5][5] = {0};
 	int pStep = 0;
 	// This part is used for analysis and AI go back
 
 	void initialize();
-	
+	// Randomly generate two blocks
+
 	void bonus(int addScore);
 
 	PBI up();
@@ -52,13 +53,15 @@ public:
 	// Randomly add a block in the map
 
 	int getScore();
+	int getTopScore();
 	string getUserName();
+	void setUserName(string name);
 	gameMap getMap();
 private:
-	int historyTopScore;
+	int historyTopScore = 0;
 	string userName;
-	int score;
+	int score = 0;
 	void copy();
-	int iCopy, jCopy;
+	int iCopy = 0, jCopy = 0;
 	block_box blocksCopy[5][5];
 };

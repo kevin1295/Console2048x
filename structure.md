@@ -1,16 +1,67 @@
-// ConsolePlayer.h
-#pragma once
+# GamwBox.h
+```cpp
+struct block_box {
+	short _int = 0;
+	bool _bool = false;
+};
+struct PBI {
+	bool _bool = false;
+	int _int = 0;
+};
 
-/*
-* 
-* This head is written for the programs which use Console as GUI in the project
-* 
-*/
+class GameBox {
+public:
+	block_box blocks[5][5];
+	short history[65536][5][5] = {0};
+	int pStep = 0;
+	void initialize();
+	void bonus(int addScore);
 
-#include <string>
-#include "BasicFunction.h"
-using namespace std;
+	PBI up();
+	PBI down();
+	PBI left();
+	PBI right();
 
+	bool checkStatement();
+
+	void addBlock();
+
+	int getScore();
+	int getTopScore();
+	string getUserName();
+	void setUserName(string name);
+	gameMap getMap();
+private:
+	int historyTopScore = 0;
+	string userName;
+	int score = 0;
+	void copy();
+	int iCopy = 0, jCopy = 0;
+	block_box blocksCopy[5][5];
+};
+```
+
+# BasicFunction.h
+```cpp
+int keyPress();
+void NEEDSDEVELOP();
+
+struct gameMap {
+	short map[5][5] = {0};
+	int step = 0, gameScore = -1, topScore = -1;
+};
+
+class ClassOfMessageBox {
+public:
+	void inputError();
+	bool logout();
+private:
+	int languageMod;
+};
+```
+
+# ConsolePlayer.h
+```cpp
 class ConsolePlayer {
 public:
 	void blockMap(gameMap map);
@@ -26,7 +77,6 @@ public:
 	int settingPage();
 
 	string setUserPage(string orin);
-	// MsgBox and jump to loginPage
 
 	void setHelpPage();
 
@@ -52,3 +102,4 @@ private:
 		infoTitle = "-------- Help --------\n", infoWords = " Welcome to 2048 designed by Jiaye Xu! \n you can press up/down/left/right arrow or W/S/A/D to make blocks drop.\n The game, at present, does not have GUI, I am looking forward to your help on github! \n #Press any key to go back",
 		languageTitle = "-------- Language --------\n", languageWords = " We have the language below for you to choose: \n 0.English \n 1.ÖÐÎÄ£¨¼òÌå£© \n";
 };
+```
