@@ -12,6 +12,7 @@
 
 int keyPress();
 void NEEDSDEVELOP();
+int ERRORMSG(int errorCode);
 
 
 struct gameMap {								// Only used for functions transportation
@@ -22,7 +23,12 @@ struct gameMap {								// Only used for functions transportation
 class ClassOfMessageBox {
 public:
 	void inputError();
+	void memoryFull();
+	bool continueGame();
 	bool logout();
+	bool interruptGame();
+	bool saveProcess();
+	bool signin();
 private:
 	int languageMod;
 };

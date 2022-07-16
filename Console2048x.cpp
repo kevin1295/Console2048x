@@ -5,6 +5,7 @@
 #include "GameBox.h"
 #include "BasicFunction.h"
 #include "ConsolePlayer.h"
+#include "MemoryFunction.h"
 
 using namespace std;
 
@@ -12,9 +13,23 @@ GameBox player;
 ConsolePlayer Display;
 ClassOfMessageBox MsgBox;
 
+gameMap memoryStorage;
+
+bool memoryAvailable;
+AllUser all;
+oneUser playerHis;
+
 int play() {
     PBI rec;
-    player.initialize();
+    Display.loadPage();
+    memoryStorage = playerHis.readMap();
+    player.initialize(memoryStorage.topScore);
+    system("cls");
+
+    if (memoryStorage.step != 0) {
+        if (MsgBox.continueGame()) player.setBlocks(memoryStorage);
+    }
+
     while (player.checkStatement()) {
         Display.blockMap(player.getMap());
         switch (keyPress()) {
@@ -62,11 +77,34 @@ int play() {
             else {
                 MsgBox.inputError(); break;
             }
+        case 27:
+            if (MsgBox.interruptGame()) {
+                if (MsgBox.saveProcess()) {
+                    playerHis.write(player.getMap());
+                    Display.blockMap(player.getMap());
+                    return player.getScore();
+                }
+                else {
+                    Display.blockMap(player.getMap());
+                    return player.getScore();
+                }
+            }
+            break;
+
         default:
             MsgBox.inputError();
         }
     }
     Display.blockMap(player.getMap());
+    for (int i = 1; i <= 4; i++) {
+        for (int j = 1; j <= 4; j++) {
+            memoryStorage.map[i][j] = 0;
+        }
+    }
+    memoryStorage.gameScore = 0;
+    memoryStorage.step = 0;
+    memoryStorage.topScore = max(memoryStorage.topScore, player.getScore());
+    playerHis.write(memoryStorage);
     return player.getScore();
 }
 
@@ -74,15 +112,34 @@ int main()
 {
     int indexReturn, setReturn;
     int mark;
-
+    memoryAvailable = all.initialize();
+    
     Display.loadPage();
+    system("cls");
     player.setUserName(Display.loginPage());
+    while (all.check(player.getUserName()) == -1) {
+        if (all.getUserAmount() == 16) {
+            MsgBox.memoryFull();
+            player.setUserName(Display.loginPage());
+        }
+        else {
+            if (MsgBox.signin()) {
+                all.signin(player.getUserName());
+                playerHis.signin(all.getUserAmount(), all.getUserName(all.getUserAmount()));
+                playerHis.setPlayer(all.getUserAmount(), all.getUserName(all.getUserAmount()));
+            }
+        }
+    }
+    Display.loadPage();
+    playerHis.setPlayer(all.check(player.getUserName()), player.getUserName());
+    memoryStorage = playerHis.readMap();
+    system("cls");
+
     Display.welcomePage();
     while (true) {
         indexReturn = Display.indexPage();
         switch (indexReturn) {
         case 1:
-            player.initialize();
             mark = play();
             Display.gameOver(mark, player.getTopScore());
             break;

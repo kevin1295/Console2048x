@@ -34,12 +34,25 @@ gameMap GameBox::getMap() {
     return ret;
 }
 
-void GameBox::initialize() {
+void GameBox::initialize(int historyTop) {
     score = 0;
+    historyTopScore = historyTop;
     memset(blocks, 0, sizeof(blocks));
     srand(int(time(0)));
     blocks[rand() % 4 + 1][rand() % 4 + 1]._int = (rand() % 2 + 1) * 2;
     blocks[rand() % 4 + 1][rand() % 4 + 1]._int = (rand() % 2 + 1) * 2;
+}
+
+void GameBox::setBlocks(gameMap sourse){
+    for (int i = 1; i <= 4; i++) {
+        for (int j = 1; j <= 4; j++) {
+            blocks[i][j]._int = sourse.map[i][j];
+            blocks[i][j]._bool = false;
+        }
+    }
+    pStep = sourse.step;
+    historyTopScore = sourse.topScore;
+    score = sourse.gameScore;
 }
 
 void GameBox::bonus(int addScore) {
@@ -106,6 +119,8 @@ PBI GameBox::up() {
     }
     if (ret._bool) {
         memcpy(blocks, blocksCopy, sizeof(blocksCopy));
+        ++pStep;
+        historyTopScore = max(historyTopScore, score + ret._int);
         return ret;
     }
     ret._int = 0;
@@ -147,6 +162,8 @@ PBI GameBox::left() {
     }
     if (ret._bool) {
         memcpy(blocks, blocksCopy, sizeof(blocksCopy));
+        ++pStep;
+        historyTopScore = max(historyTopScore, score + ret._int);
         return ret;
     }
     ret._int = 0;
@@ -188,6 +205,8 @@ PBI GameBox::down() {
     }
     if (ret._bool) {
         memcpy(blocks, blocksCopy, sizeof(blocksCopy));
+        ++pStep;
+        historyTopScore = max(historyTopScore, score + ret._int);
         return ret;
     }
     ret._int = 0;
@@ -229,6 +248,8 @@ PBI GameBox::right() {
     }
     if (ret._bool) {
         memcpy(blocks, blocksCopy, sizeof(blocksCopy));
+        ++pStep;
+        historyTopScore = max(historyTopScore, score + ret._int);
         return ret;
     }
     ret._int = 0;

@@ -143,14 +143,17 @@
     <ClCompile Include="Console2048x.cpp" />
     <ClCompile Include="ConsolePlayer.cpp" />
     <ClCompile Include="GameBox.cpp" />
+    <ClCompile Include="MemoryFunction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicFunction.h" />
     <ClInclude Include="ConsolePlayer.h" />
     <ClInclude Include="GameBox.h" />
+    <ClInclude Include="MemoryFunction.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="structure.md" />
+    <None Include="MenoryStandardFile.file" />
+    <None Include="ToDo.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

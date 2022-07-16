@@ -27,6 +27,9 @@
     <ClCompile Include="ConsolePlayer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="MemoryFunction.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameBox.h">
@@ -38,9 +41,15 @@
     <ClInclude Include="ConsolePlayer.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="MemoryFunction.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="structure.md">
+    <None Include="ToDo.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="MenoryStandardFile.file">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>

@@ -33,11 +33,12 @@ public:
 	block_box blocks[5][5];
 	// This vari is used to store the present map
 
-	short history[65536][5][5] = {0};
+	short history[65536][5][5] = {0};	// For ctrl+Z and record for AI
 	int pStep = 0;
 	// This part is used for analysis and AI go back
 
-	void initialize();
+	void initialize(int historyTop);
+	void setBlocks(gameMap sourse);
 	// Randomly generate two blocks
 
 	void bonus(int addScore);

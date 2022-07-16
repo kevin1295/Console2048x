@@ -49,6 +49,6 @@ private:
 		wrongInputWords = "WrongInput", conTitle = "title welcome to 2048!",
 		setTitleWords = "-------- Set --------\n", setMenuWords = " 1.user \n 2.help \n 3.language ”Ô—‘ \n 4.history \n #press ESC to go back\n",
 		logInTitle = "-------- Log In --------\n", getUserNameWords = "Please input your nickname: \n",
-		infoTitle = "-------- Help --------\n", infoWords = " Welcome to 2048 designed by Jiaye Xu! \n you can press up/down/left/right arrow or W/S/A/D to make blocks drop.\n The game, at present, does not have GUI, I am looking forward to your help on github! \n #Press any key to go back",
+		infoTitle = "-------- Help --------\n", infoWords = " Welcome to 2048 designed by Jiaye Xu! \n you can press up/down/left/right arrow or W/S/A/D to make blocks drop.\n You can press Esc to interrupt the game, and continue next time.\n The game, at present, does not have GUI, I am looking forward to your help on github! \n #Press any key to go back",
 		languageTitle = "-------- Language --------\n", languageWords = " We have the language below for you to choose: \n 0.English \n 1.÷–Œƒ£®ºÚÃÂ£© \n";
 };
