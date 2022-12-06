@@ -13,15 +13,13 @@ using namespace std;
 
 class ConsolePlayer {
 public:
-	void blockMap(gameMap map);
-	
-	int indexPage();
+	void loadPage();
 
 	string loginPage();
 
-	void loadPage();
-
 	void welcomePage();
+
+	int indexPage();
 
 	int settingPage();
 
@@ -32,13 +30,17 @@ public:
 
 	void setLanguage();
 
-	void setEN_US();
-
-	void setZH_CN();
+	void gameOver(int score, int highestScore);
 
 	void historyPage();
 
-	void gameOver(int score, int highestScore);
+	void blockMap(gameMap map);
+
+	int getLanguage();
+
+	void setEN_US();
+
+	void setZH_CN();
 
 private:
 

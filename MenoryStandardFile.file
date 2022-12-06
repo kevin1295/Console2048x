@@ -1,4 +1,4 @@
-# user\\all\\config.memoryfile
+# -------------------------------- user\\all\\config.memoryfile --------------------------------
 [Player Version]
 [Top Score]
 
@@ -9,7 +9,7 @@ Name List
 
 
 #
-v0.0.1alpha
+v0.1.1beta.1
 10482
 
 3
@@ -17,7 +17,11 @@ kevin
 shell
 steve
 
-# user\\kevin\\.memoryfile
+# -------------------------------- user\\all\\settings.momeryfile ------------------------------
+[Player Version]
+[language]
+
+# -------------------------------- user\\kevin\\.memoryfile --------------------------------
 [Last play time]
 
 [

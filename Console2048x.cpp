@@ -113,6 +113,18 @@ int main()
     int indexReturn, setReturn;
     int mark;
     memoryAvailable = all.initialize();
+    switch (all.getLanguage())
+    {
+    case 0:
+        Display.setEN_US();
+        break;
+    case 1:
+        Display.setZH_CN();
+        break;
+    default:
+        Display.setEN_US();
+        break;
+    }
     
     Display.loadPage();
     system("cls");
@@ -161,6 +173,7 @@ int main()
         case 27:
             return 0;
         }
+        all.setLanguage(Display.getLanguage());
     }
 
     return 0;
